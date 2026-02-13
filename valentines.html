@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>20 date idea's die we kunnen doen 💖</title>
+  <title>30 Valentijn Dates ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap 5 -->
@@ -10,8 +10,8 @@
 
   <style>
     body {
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
     }
 
     h1 {
@@ -19,30 +19,25 @@
       font-weight: 700;
     }
 
-    .card-container {
+    .card-flip {
       perspective: 1000px;
-    }
-
-    .flip-card {
-      width: 100%;
-      height: 180px;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.6s;
       cursor: pointer;
     }
 
-    .flip-card.flipped {
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .card-flip.flipped .card-inner {
       transform: rotateY(180deg);
     }
 
-    .flip-card.disabled {
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    .flip-card-front,
-    .flip-card-back {
+    .card-front,
+    .card-back {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -53,123 +48,94 @@
       justify-content: center;
       text-align: center;
       padding: 15px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
 
-    .flip-card-front {
+    .card-front {
       background: #fff;
-      font-size: 1.5rem;
-      color: #e60073;
+      color: #b30059;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
-    .flip-card-back {
-      background: #e60073;
+    .card-back {
+      background: #b30059;
       color: #fff;
       transform: rotateY(180deg);
-    }
-
-    .counter {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #800040;
+      font-size: 0.95rem;
     }
   </style>
 </head>
+
 <body>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">❤️ 30 Valentijn Dates ❤️</h1>
+    <p class="text-center mb-5">Klik op een kaartje om de date te onthullen</p>
 
-<div class="container py-5">
-  <div class="text-center mb-4">
-    <h1>💘 20 dates dat we kunnen doen 💘</h1>
-    <p class="counter">Je mag nog <span id="remaining">3</span> kaartjes omdraaien</p>
+    <div class="row g-4">
+
+      <!-- BINNEN (10) -->
+      <script>
+        const dates = [
+          // Binnen (10)
+          ["Thuisbioscoop 🎬", "Kies 3 films, maak popcorn en bouw een fort"],
+          ["Kookbattle 🍝", "Allebei hetzelfde ingrediënt, wie wint?"],
+          ["Massage-avond 💆‍♀️", "Kaarsen, olie en ontspanning"],
+          ["Spelletjesavond 🎲", "Verliezer regelt ontbijt"],
+          ["Wijnproeverij 🍷", "Blind proeven met scores"],
+          ["Samen schilderen 🎨", "Abstract & romantisch"],
+          ["Quiz over elkaar ❓", "Hoe goed ken je elkaar echt?"],
+          ["Playlist-date 🎶", "Maak samen jullie soundtrack"],
+          ["Ontbijt op bed 🥐", "Inclusief mimosa’s"],
+          ["Fotoshoot thuis 📸", "Met timer en gekke poses"],
+
+          // Low-cost (10)
+          ["Zonsondergang-wandeling 🌅", "Gratis en romantisch"],
+          ["Picknick 🧺", "Zelfgemaakt & simpel"],
+          ["Koffiedate ☕", "Op een bankje in de stad"],
+          ["Gratis museumdag 🖼️", "Check lokale agenda"],
+          ["Stadswandeling 🏙️", "Ontdek onbekende straatjes"],
+          ["Bibliotheek-date 📚", "Lees elkaar voor"],
+          ["Markt bezoeken 🍓", "Proeven & rondslenteren"],
+          ["Strandwandeling 🌊", "Ook leuk in de winter"],
+          ["Streetfood delen 🌮", "Eén hap per kraam"],
+          ["Sterren kijken ✨", "Met warme dekens"],
+
+          // Etentje (5)
+          ["Italiaans diner 🍝", "Romantisch en klassiek"],
+          ["Sushi-avond 🍣", "Delen = liefde"],
+          ["Tapas 🍷", "Veel kleine gerechtjes"],
+          ["Frans restaurant 🇫🇷", "Intiem en stijlvol"],
+          ["Vegan fine dining 🌱", "Verrassend lekker"],
+
+          // Prijzig (5)
+          ["Wellnessdag 🧖‍♂️", "Sauna & massage"],
+          ["Hotelovernachting 🏨", "Inclusief ontbijt"],
+          ["Ballonvaart 🎈", "Uitzicht & champagne"],
+          ["Concert 🎶", "Live muziek samen"],
+          ["Michelin-restaurant ⭐", "Een avond om nooit te vergeten"]
+        ];
+
+        dates.sort(() => Math.random() - 0.5);
+
+        document.write(
+          dates.map(d => `
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card-flip" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                  <div class="card-front">
+                    ❤️ Klik voor date ❤️
+                  </div>
+                  <div class="card-back">
+                    <strong>${d[0]}</strong><br>${d[1]}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('')
+        );
+      </script>
+
+    </div>
   </div>
-
-  <div class="row g-4">
-    <!-- 20 KAARTEN -->
-    <!-- Pas de tekst in de BACK aan -->
-    <!-- Kaart 1 -->
-    <div class="col-6 col-md-3">
-      <div class="card-container">
-        <div class="flip-card" onclick="flipCard(this)">
-          <div class="flip-card-front">💖</div>
-          <div class="flip-card-back">
-            <h5>Weekendje weg</h5>
-            <p>Even samen ontsnappen 💕</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Kaart 2 -->
-    <div class="col-6 col-md-3">
-      <div class="card-container">
-        <div class="flip-card" onclick="flipCard(this)">
-          <div class="flip-card-front">💖</div>
-          <div class="flip-card-back">
-            <h5>Zetelavond</h5>
-            <p>Ik kook & jouw favoriete films 🎬</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Kaart 3 -->
-    <div class="col-6 col-md-3">
-      <div class="card-container">
-        <div class="flip-card" onclick="flipCard(this)">
-          <div class="flip-card-front">💖</div>
-          <div class="flip-card-back">
-            <h5>Yes Day</h5>
-            <p>Alles wat jij wil 😘</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Kaart 4 -->
-    <div class="col-6 col-md-3">
-      <div class="card-container">
-        <div class="flip-card" onclick="flipCard(this)">
-          <div class="flip-card-front">💖</div>
-          <div class="flip-card-back">
-            <h5>Chill Dag</h5>
-            <p>Geen planning, alleen wij 🌸</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dupliceer dit blok tot je 20 kaarten hebt -->
-    <!-- TIP: copy/paste 16x en pas alleen de tekst aan -->
-
-  </div>
-</div>
-
-<script>
-  let maxFlips = 3;
-  let currentFlips = 0;
-
-  function flipCard(card) {
-    if (card.classList.contains('flipped')) return;
-    if (currentFlips >= maxFlips) return;
-
-    card.classList.add('flipped');
-    currentFlips++;
-
-    document.getElementById('remaining').innerText = maxFlips - currentFlips;
-
-    if (currentFlips === maxFlips) {
-      lockRemainingCards();
-    }
-  }
-
-  function lockRemainingCards() {
-    document.querySelectorAll('.flip-card').forEach(card => {
-      if (!card.classList.contains('flipped')) {
-        card.classList.add('disabled');
-      }
-    });
-  }
-</script>
-
 </body>
 </html>
