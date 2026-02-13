@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>30 Valentijn Dates ❤️</title>
+  <title>Date Dagboek ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap 5 -->
@@ -27,7 +27,7 @@
     .card-inner {
       position: relative;
       width: 100%;
-      height: 180px;
+      height: 220px;
       transition: transform 0.8s;
       transform-style: preserve-3d;
     }
@@ -42,100 +42,129 @@
       width: 100%;
       height: 100%;
       backface-visibility: hidden;
-      border-radius: 15px;
+      border-radius: 16px;
+      padding: 16px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
       text-align: center;
-      padding: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .card-front {
-      background: #fff;
+      background: #ffffff;
       color: #b30059;
       font-weight: 600;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .card-back {
       background: #b30059;
-      color: #fff;
+      color: #ffffff;
       transform: rotateY(180deg);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      justify-content: space-between;
+    }
+
+    .delete-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
     }
   </style>
 </head>
 
 <body>
-  <div class="container py-5">
-    <h1 class="text-center mb-4">❤️ 30 Valentijn Dates ❤️</h1>
-    <p class="text-center mb-5">Klik op een kaartje om de date te onthullen</p>
+<div class="container py-5">
 
-    <div class="row g-4">
+  <h1 class="text-center mb-3">❤️ Ons Date Dagboek ❤️</h1>
+  <p class="text-center mb-4">Ideeën verzamelen, plannen en herinneringen bewaren</p>
 
-      <!-- BINNEN (10) -->
-      <script>
-        const dates = [
-          // Binnen (10)
-          ["Thuisbioscoop 🎬", "Kies 3 films, maak popcorn en bouw een fort"],
-          ["Kookbattle 🍝", "Allebei hetzelfde ingrediënt, wie wint?"],
-          ["Massage-avond 💆‍♀️", "Kaarsen, olie en ontspanning"],
-          ["Spelletjesavond 🎲", "Verliezer regelt ontbijt"],
-          ["Wijnproeverij 🍷", "Blind proeven met scores"],
-          ["Samen schilderen 🎨", "Abstract & romantisch"],
-          ["Quiz over elkaar ❓", "Hoe goed ken je elkaar echt?"],
-          ["Playlist-date 🎶", "Maak samen jullie soundtrack"],
-          ["Ontbijt op bed 🥐", "Inclusief mimosa’s"],
-          ["Fotoshoot thuis 📸", "Met timer en gekke poses"],
-
-          // Low-cost (10)
-          ["Zonsondergang-wandeling 🌅", "Gratis en romantisch"],
-          ["Picknick 🧺", "Zelfgemaakt & simpel"],
-          ["Koffiedate ☕", "Op een bankje in de stad"],
-          ["Gratis museumdag 🖼️", "Check lokale agenda"],
-          ["Stadswandeling 🏙️", "Ontdek onbekende straatjes"],
-          ["Bibliotheek-date 📚", "Lees elkaar voor"],
-          ["Markt bezoeken 🍓", "Proeven & rondslenteren"],
-          ["Strandwandeling 🌊", "Ook leuk in de winter"],
-          ["Streetfood delen 🌮", "Eén hap per kraam"],
-          ["Sterren kijken ✨", "Met warme dekens"],
-
-          // Etentje (5)
-          ["Italiaans diner 🍝", "Romantisch en klassiek"],
-          ["Sushi-avond 🍣", "Delen = liefde"],
-          ["Tapas 🍷", "Veel kleine gerechtjes"],
-          ["Frans restaurant 🇫🇷", "Intiem en stijlvol"],
-          ["Vegan fine dining 🌱", "Verrassend lekker"],
-
-          // Prijzig (5)
-          ["Wellnessdag 🧖‍♂️", "Sauna & massage"],
-          ["Hotelovernachting 🏨", "Inclusief ontbijt"],
-          ["Ballonvaart 🎈", "Uitzicht & champagne"],
-          ["Concert 🎶", "Live muziek samen"],
-          ["Michelin-restaurant ⭐", "Een avond om nooit te vergeten"]
-        ];
-
-        dates.sort(() => Math.random() - 0.5);
-
-        document.write(
-          dates.map(d => `
-            <div class="col-6 col-md-4 col-lg-3">
-              <div class="card-flip" onclick="this.classList.toggle('flipped')">
-                <div class="card-inner">
-                  <div class="card-front">
-                    ❤️ Klik voor date ❤️
-                  </div>
-                  <div class="card-back">
-                    <strong>${d[0]}</strong><br>${d[1]}
-                  </div>
-                </div>
-              </div>
-            </div>
-          `).join('')
-        );
-      </script>
-
+  <!-- FORM -->
+  <div class="card mb-5 p-4">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <input type="text" id="title" class="form-control" placeholder="Naam van de date">
+      </div>
+      <div class="col-md-3">
+        <input type="text" id="category" class="form-control" placeholder="Categorie (binnen / buiten / luxe)">
+      </div>
+      <div class="col-md-5">
+        <input type="text" id="info" class="form-control" placeholder="Extra info / ideeën / locatie">
+      </div>
+      <div class="col-12 text-end">
+        <button class="btn btn-danger mt-2" onclick="addDate()">➕ Date toevoegen</button>
+      </div>
     </div>
   </div>
+
+  <!-- CARDS -->
+  <div class="row g-4" id="dateList"></div>
+
+</div>
+
+<script>
+  let dates = JSON.parse(localStorage.getItem("dates")) || [];
+
+  function saveDates() {
+    localStorage.setItem("dates", JSON.stringify(dates));
+  }
+
+  function addDate() {
+    const title = document.getElementById("title").value.trim();
+    const category = document.getElementById("category").value.trim();
+    const info = document.getElementById("info").value.trim();
+
+    if (!title) return alert("Geef je date een naam ❤️");
+
+    dates.push({ title, category, info });
+    saveDates();
+    renderDates();
+
+    document.getElementById("title").value = "";
+    document.getElementById("category").value = "";
+    document.getElementById("info").value = "";
+  }
+
+  function deleteDate(index) {
+    dates.splice(index, 1);
+    saveDates();
+    renderDates();
+  }
+
+  function renderDates() {
+    const list = document.getElementById("dateList");
+    list.innerHTML = "";
+
+    dates.forEach((d, i) => {
+      list.innerHTML += `
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card-flip" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+              <div class="card-front">
+                <h6>${d.title}</h6>
+                <small>${d.category || ""}</small>
+              </div>
+              <div class="card-back">
+                <div>
+                  <strong>Idee / info</strong><br>
+                  ${d.info || "Geen extra info"}
+                </div>
+                <button class="delete-btn" onclick="event.stopPropagation(); deleteDate(${i})">
+                  🗑️ verwijderen
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  renderDates();
+</script>
+
 </body>
 </html>
