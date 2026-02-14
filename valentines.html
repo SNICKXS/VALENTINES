@@ -1,169 +1,238 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>Date Dagboek ❤️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Valentijn SPA 💘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    body {
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      font-family: 'Segoe UI', sans-serif;
-    }
+<style>
+body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-    h1 {
-      color: #b30059;
-      font-weight: 700;
-    }
+.page {
+    display: none;
+    min-height: 100vh;
+}
 
-    .card-flip {
-      perspective: 1000px;
-      cursor: pointer;
-    }
+.page.active {
+    display: flex;
+}
 
-    .card-inner {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
+.center-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+}
 
-    .card-flip.flipped .card-inner {
-      transform: rotateY(180deg);
-    }
+.btn-main {
+    background-color: #d6336c;
+    color: #fff;
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-weight: 600;
+}
 
-    .card-front,
-    .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
+.btn-outline-main {
+    border: 2px solid #d6336c;
+    color: #d6336c;
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-weight: 600;
+}
 
-    .card-front {
-      background: #ffffff;
-      color: #b30059;
-      font-weight: 600;
-    }
+.btn-main:hover,
+.btn-outline-main:hover {
+    transform: scale(1.03);
+}
 
-    .card-back {
-      background: #b30059;
-      color: #ffffff;
-      transform: rotateY(180deg);
-      font-size: 0.9rem;
-      justify-content: space-between;
-    }
+.card-container { perspective: 1000px; }
 
-    .delete-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      border-radius: 8px;
-      padding: 4px 8px;
-      font-size: 0.8rem;
-    }
-  </style>
+.flip-card {
+    height: 180px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.flip-card.flipped { transform: rotateY(180deg); }
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.flip-card-front {
+    background: #fff;
+    color: #d6336c;
+    font-weight: 700;
+}
+
+.flip-card-back {
+    background: #d6336c;
+    color: #fff;
+    transform: rotateY(180deg);
+}
+</style>
 </head>
-
 <body>
-<div class="container py-5">
 
-  <h1 class="text-center mb-3">❤️ Ons Date Dagboek ❤️</h1>
-  <p class="text-center mb-4">Ideeën verzamelen, plannen en herinneringen bewaren</p>
+<!-- START PAGE -->
+<div id="home" class="page active justify-content-center align-items-center">
+    <div class="center-card">
+        <h1 class="mb-3">Een fijne valentijn liefje! 💖</h1>
+        <p>Klik op de knoppen en ontdek! Voor meer info (vraag maar aan mij :p)</p>
 
-  <!-- FORM -->
-  <div class="card mb-5 p-4">
-    <div class="row g-3">
-      <div class="col-md-4">
-        <input type="text" id="title" class="form-control" placeholder="Naam van de date">
-      </div>
-      <div class="col-md-3">
-        <input type="text" id="category" class="form-control" placeholder="Categorie (binnen / buiten / luxe)">
-      </div>
-      <div class="col-md-5">
-        <input type="text" id="info" class="form-control" placeholder="Extra info / ideeën / locatie">
-      </div>
-      <div class="col-12 text-end">
-        <button class="btn btn-danger mt-2" onclick="addDate()">➕ Date toevoegen</button>
-      </div>
+        <div class="d-grid gap-3">
+            <button class="btn btn-main" onclick="showPage('dates')">
+                💘 Naar een overzicht voor wat we kunnen doen
+            </button>
+            <button class="btn btn-outline-main" onclick="showPage('surprise')">
+                🎁 Klik hier voor nog een extra verrassing
+            </button>
+        </div>
     </div>
-  </div>
+</div>
 
-  <!-- CARDS -->
-  <div class="row g-4" id="dateList"></div>
+<!-- DATES PAGE -->
+<div id="dates" class="page flex-column">
+    <div class="container py-4">
+        <button class="btn btn-outline-main mb-4" onclick="showPage('home')">← Terug</button>
+        <h1 class="text-center text-white mb-4">💘 Date Nights 💘</h1>
+        <h2 class="text-center text-white mb-4"> Deze lijst kan nog altijd bijgevuld worden </h2>
+        <h3 class="text-center text-white mb-4"> We kunnen ook dates herhalen </h3>
+        <div class="row g-4" id="cards"></div>
+    </div>
+</div>
 
+<!-- SURPRISE PAGE -->
+<div id="surprise" class="page justify-content-center align-items-center">
+    <div class="center-card">
+        <h1>SUPRISE 💕</h1>
+        <p>
+          <strong>Het echte pakje komt nog hihi</strong>
+            <br>
+            Aangezien ik niet echt wist wat ik wou doen voor valentijn, heb ik besloten dat ik een heel mooi boekje ga halen waar wij al onze dates die we gaan doen (kleine en grote) in kunnen zetten. 
+            <br>
+            Zodat wij later nog een mooie herinnering hebben met de leuke dates die wij hebben gedaan. 
+            <br>
+            In dit boekje kunnen wij vanalles schrijven, een foto in plakken (pollaroid of iets anders 😉) met wat we hebben gedaan, een rating, ....
+            <br>
+            Ik hoop dat je het leuk gaat vinden!
+        </p>
+        <button class="btn btn-main mt-3" onclick="showPage('home')">
+            Terug naar start
+        </button>
+    </div>
 </div>
 
 <script>
-  let dates = JSON.parse(localStorage.getItem("dates")) || [];
+/* ---------- SPA NAV ---------- */
+function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
 
-  function saveDates() {
-    localStorage.setItem("dates", JSON.stringify(dates));
-  }
+/* ---------- DATA ---------- */
+const TOTAL = 32;
+const ORDER_KEY = "spa_card_order";
+const FLIPPED_KEY = "spa_flipped";
 
-  function addDate() {
-    const title = document.getElementById("title").value.trim();
-    const category = document.getElementById("category").value.trim();
-    const info = document.getElementById("info").value.trim();
+const dateIdeas = {
+  1: "Ik kook voor jou met een kaarslicht 🍝🕯️",
+                  2: "Een mooi en leuke wandeling gaan doen (met een theetje, warme choco of iets anders)☕❤️",
+                  3: "Filmavond met onze favoriete films 🎬🍿",
+                  4: "Picknick (binnen of buiten) 🧺💕",
+                  5: "Een studio Ghibli movie day",
+                  6: "Samen dessert of een gebakje maken & proeven 🍰🍓",
+                  7: "Een weekendje weg!",
+                  8: "Een dag met gezichtsmaskertjes!🛁💆‍♀️",
+                  9: "Een museum naar keuze bezoeken",
+                  10: "CINEMAAAAA DATEEEEEEEEE",
+                  11: "Just dance date",
+                  12: "Naar de karaoke gaan!",
+                  13: "Een concert naar keuze (exclusief de concerten waar we al naar toe gaan)",
+                  14:"Een avond waar we cocktails sippen (thuis of ergens anders) 🍸",
+                  15:"Uitwaaien aan de zee of het strand",
+                  16:"Een pretparkbezoek!",
+                  17:"Citytrip (naar keuze of via suprs me)",
+                  18:"Een keertje gaan uit eten (iets kleins, iets fancy, ergens chill, ...)",
+                  19:"Een kringwinkel, rommelmarktje bezoeken om leuke spulletjes zoeken (beide mag)",
+                  20:"Klei date!",
+                  21:"We gaan mini golfen",
+                  22:"We houden een gamenight (gezeldschap & console game)",
+                  23:"We gaan een stad bezoeken",
+                  24:"Naar het kattencafe gaan",
+                  25:"Gaan schaatsen",
+                  26:"Sushi at home🍱",
+                  27:"Naar de zoo gaan",
+                  28:"Een hapjes avond",
+                  29:"Een creatieve avond (zoals een prutsparty maar niet een klei date)",
+                  30:"Gaan shoppennn!",
+                  31:"Naar de sauna of wellness met ons 2",
+                  32:"Een zonsopgang of ondergang gaan kijken 🌅🌄"
+};
 
-    if (!title) return alert("Geef je date een naam ❤️");
+/* ---------- ORDER ---------- */
+let order = JSON.parse(localStorage.getItem(ORDER_KEY));
+if (!order) {
+    order = Array.from({length: TOTAL}, (_, i) => i + 1);
+    for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+    }
+    localStorage.setItem(ORDER_KEY, JSON.stringify(order));
+}
 
-    dates.push({ title, category, info });
-    saveDates();
-    renderDates();
+/* ---------- FLIPPED ---------- */
+let flipped = JSON.parse(localStorage.getItem(FLIPPED_KEY)) || [];
 
-    document.getElementById("title").value = "";
-    document.getElementById("category").value = "";
-    document.getElementById("info").value = "";
-  }
+function toggleCard(num, el) {
+    el.classList.toggle("flipped");
+    flipped.includes(num)
+        ? flipped = flipped.filter(n => n !== num)
+        : flipped.push(num);
+    localStorage.setItem(FLIPPED_KEY, JSON.stringify(flipped));
+}
 
-  function deleteDate(index) {
-    dates.splice(index, 1);
-    saveDates();
-    renderDates();
-  }
+/* ---------- RENDER ---------- */
+const container = document.getElementById("cards");
+order.forEach(i => {
+    const back = dateIdeas[i] ?? `Date idee ${i}`;
+    const isFlipped = flipped.includes(i) ? "flipped" : "";
 
-  function renderDates() {
-    const list = document.getElementById("dateList");
-    list.innerHTML = "";
-
-    dates.forEach((d, i) => {
-      list.innerHTML += `
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="card-flip" onclick="this.classList.toggle('flipped')">
-            <div class="card-inner">
-              <div class="card-front">
-                <h6>${d.title}</h6>
-                <small>${d.category || ""}</small>
-              </div>
-              <div class="card-back">
-                <div>
-                  <strong>Idee / info</strong><br>
-                  ${d.info || "Geen extra info"}
+    container.innerHTML += `
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card-container position-relative">
+            <div class="flip-card ${isFlipped}" onclick="toggleCard(${i}, this)">
+                <div class="flip-card-front">
+                    💝 Reveal date nummer ${i}
                 </div>
-                <button class="delete-btn" onclick="event.stopPropagation(); deleteDate(${i})">
-                  🗑️ verwijderen
-                </button>
-              </div>
+                <div class="flip-card-back">
+                    ${back}
+                </div>
             </div>
-          </div>
         </div>
-      `;
-    });
-  }
-
-  renderDates();
+    </div>`;
+});
 </script>
 
 </body>
